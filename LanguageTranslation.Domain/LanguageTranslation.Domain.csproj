@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AggregateRoot\" />
+    <None Remove="Shared\" />
+    <None Remove="Exceptions\" />
+    <None Remove="AggregateRoot\TranslationAggregate\" />
+    <None Remove="AggregateRoot\LanguageAggregate\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AggregateRoot\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="AggregateRoot\TranslationAggregate\" />
+    <Folder Include="AggregateRoot\LanguageAggregate\" />
+  </ItemGroup>
+</Project>

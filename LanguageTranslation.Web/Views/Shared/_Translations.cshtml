@@ -1,0 +1,25 @@
+﻿@model LanguageTranslation.Web.ViewModel.HomeIndexViewModel;
+
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            @foreach (var translate in Model.Translations)
+            {
+                <tr class="clickable-row">
+                    <td></td>
+                    <td>@translate.Text</td>
+                </tr>
+                <tr class="extra-info-row hidden-row">
+                    <td colspan="3">@translate.Translated</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

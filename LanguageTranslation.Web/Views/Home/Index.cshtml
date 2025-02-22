@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model LanguageTranslation.Web.ViewModel.HomeIndexViewModel
+
+<form id="myForm" asp-action="/">
+    <div class="row">
+        <div class="col-md-4">
+            @Html.DropDownList("languageId", Model.Languages)
+        </div>
+        <div class="col-md-6">
+            <input name="text" class="form-control form-control-sm" type="text" placeholder="Enter text here" aria-label=".form-control-sm example">
+        </div>
+        <div class="col-md-2">
+            <button onclick="submitForm()" type="submit" class="btn btn-outline-primary btn-sm">Translate</button>
+        </div>
+    </div>
+ </form>
+      
+        <div class="container" id="partialViewContainer">
+            @await Html.PartialAsync("_Translations", @Model)
+        </div>
+
+        @section scripts {
+
+            <script>
+
+                function submitForm() {
+                    event.preventDefault();
+                    var form = document.getElementById('myForm');
+                    const data = Object.fromEntries(new FormData(form).entries());
+                    $.ajax({
+                        url: '@Url.Action("OnPostTranslationRowPartial", "Home")',
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        dataType: "Text",
+                        success: function (data) {
+                            var tableBody = document.getElementById('tableBody');
+                            tableBody.insertAdjacentHTML('afterbegin', data);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                }
+
+    $(document).ready(function () {
+        $("#languageId").change(function () {
+            var selectedValue = $("#languageId").val()
+            loadPartialView(selectedValue)
+        });
+    });
+
+       function loadPartialView(languageId) {
+            var url = '@Url.Action("OnGetTranslationPartial", "Home",new { languageId = "-1" })'
+            url = url.replace("-1", languageId);
+       $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (data) {
+            $('#partialViewContainer').html(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+   }
+            </script>
+        }
