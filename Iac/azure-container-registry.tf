@@ -5,7 +5,7 @@ resource "azurerm_container_registry" "container-registry-translation" {
   sku                  = "Standard"           # Set the SKU to Standard
 
   admin_enabled = true  # Enable admin user for registry access
-
+  
   tags = {
     environment = "Development"  # Example tag: key = "Environment", value = "Development"
     src = var.src_key
