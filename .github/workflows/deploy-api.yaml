@@ -27,4 +27,5 @@ jobs:
       
       - name: SHA of the commit
         id: commit_sha
-        run: echo "::set-output name=sha::$(echo $GITHUB_SHA | cut -c1-7)"
+        run: |
+          echo "sha=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
