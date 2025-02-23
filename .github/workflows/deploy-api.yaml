@@ -35,9 +35,9 @@ jobs:
           IMAGE_TAG: ${{ steps.commit_sha.outputs.sha }}
           ACR_REGISTRY: ${{ secrets.ACR_LOGIN_SERVER  }}  # The name of your ACR registry
         run: |
-          docker build -f LanguageTranslation/Dockerfile  -t ${{ ACR_REGISTRY }}/language-translation${{IMAGE_TAG }}  -t ${{ ACR_REGISTRY }}/language-translation:latest .  # Build the image with the tag "latest"
+          docker build -f LanguageTranslation/Dockerfile  -t ${{ env.ACR_REGISTRY }}/language-translation${{env.IMAGE_TAG }}  -t ${{ ACR_REGISTRY }}/language-translation:latest .  # Build the image with the tag "latest"
 
       #  Push the Docker image to Azure Container Registry
       - name: Push Docker image to ACR
         run: |
-          docker push ${{ ACR_REGISTRY }}/language-translation --all-tags # Push the image to ACR
+          docker push ${{ env.ACR_REGISTRY }}/language-translation --all-tags # Push the image to ACR
