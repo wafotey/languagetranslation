@@ -24,3 +24,7 @@ jobs:
           login-server: ${{ secrets.ACR_LOGIN_SERVER }}  # The login server for ACR (e.g., <your-registry-name>.azurecr.io)
           username: ${{ secrets.ACR_USERNAME }}  # The ACR username (can be a service principal or admin)
           password: ${{ secrets.ACR_PASSWORD }}  # The ACR password or service principal password
+      
+      - name: SHA of the commit
+        id: commit_sha
+        run: echo "::set-output name=sha::$(echo $GITHUB_SHA | cut -c1-7)"
