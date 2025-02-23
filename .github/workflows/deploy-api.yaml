@@ -40,4 +40,4 @@ jobs:
       #  Push the Docker image to Azure Container Registry
       - name: Push Docker image to ACR
         run: |
-          docker push ${{ env.ACR_REGISTRY }}/language-translation --all-tags # Push the image to ACR
+          docker push ${{ vars.ACR_LOGIN_SERVER }}/language-translation --all-tags # Push the image to ACR
